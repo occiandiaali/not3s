@@ -36,7 +36,7 @@ class AddNoteActivity : AppCompatActivity() {
         if (id ==0){
             val ID = dbManager.insert(values)
             if (ID>0){
-                Toast.makeText(this, "Not3 added", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Not3 has been added", Toast.LENGTH_SHORT).show()
                 finish()
             }
             else{
@@ -47,7 +47,7 @@ class AddNoteActivity : AppCompatActivity() {
             var selectionArgs = arrayOf(id.toString())
             val ID = dbManager.update(values, "ID=?", selectionArgs)
             if (ID>0){
-                Toast.makeText(this, "Not3 added", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Not3 has been added", Toast.LENGTH_SHORT).show()
                 finish()
             }
             else{
