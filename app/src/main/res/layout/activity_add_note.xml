@@ -18,8 +18,7 @@
                 android:layout_margin="5dp"
                 app:cardUseCompatPadding="true"
                 app:cardPreventCornerOverlap="false"
-                app:cardCornerRadius="8dp"
-                app:cardBackgroundColor="@android:color/white">
+                app:cardCornerRadius="8dp">
 
 
                 <LinearLayout
@@ -53,15 +52,14 @@
 
             </androidx.cardview.widget.CardView>
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/floatingActionButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:focusable="true"
+            <ImageView
+                android:id="@+id/checkImageView"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:onClick="addFunc"
                 android:layout_gravity="bottom|center"
-                app:srcCompat="@drawable/ic_add"
-                android:onClick="addFunc"/>
+                android:src="@drawable/green_check"/>
+
         </LinearLayout>
 
     </ScrollView>

@@ -1,8 +1,9 @@
 <resources>
-    <string name="app_name">Not3s</string>
+    <string name="app_name">Nota</string>
     <string name="settings">Settings</string>
     <string name="search">Search</string>
     <string name="new_note">New</string>
-    <string name="add_note_hint">Give your not3 a title</string>
-    <string name="note_hint">Type your not3 here..</string>
+    <string name="add_note_hint">Note title</string>
+    <string name="note_hint">Note contents..</string>
+    <string name="darkness">Mode (Dark/Light)</string>
 </resources>

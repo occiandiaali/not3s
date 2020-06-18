@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity() {
         val mActionBar = supportActionBar
         if (mActionBar != null) {
             //set to actionbar as subtitle of actionbar
-            mActionBar.subtitle = "You have $total note(s) in list..."
+            mActionBar.subtitle = "$total note(s)"
         }
     }
 
@@ -93,10 +93,15 @@ class MainActivity : AppCompatActivity() {
         if (item != null) {
             when (item.itemId) {
                 R.id.addNote -> {
-                    startActivity(Intent(this, AddNoteActivity::class.java))
+                    val addNoteIntent = Intent(this@MainActivity, AddNoteActivity::class.java)
+                    addNoteIntent.putExtra("note", "New Note")
+                    startActivity(addNoteIntent)
+                    //startActivity(Intent(this, AddNoteActivity::class.java))
                 }
                 R.id.action_settings -> {
-                    Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show()
+                    val settingsIntent = Intent(this@MainActivity, SettingsActivity::class.java)
+                    settingsIntent.putExtra("settings", "settings")
+                    startActivity(settingsIntent)
                 }
             }
         }
@@ -126,10 +131,12 @@ class MainActivity : AppCompatActivity() {
                 dbManager.delete("ID=?", selectionArgs)
                 LoadQuery("%")
             }
+
+            myView.setOnClickListener { GoToUpdateFun(myNote) }
             //edit//update button click
-            myView.editBtn.setOnClickListener {
-                GoToUpdateFun(myNote)
-            }
+//            myView.editBtn.setOnClickListener {
+//                GoToUpdateFun(myNote)
+//            }
             //copy btn click
             myView.copyBtn.setOnClickListener {
                 //get title
@@ -177,6 +184,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun GoToUpdateFun(myNote: Note) {
         var intent = Intent(this, AddNoteActivity::class.java)
+        intent.putExtra("edit", "Edit Nota") // edit
         intent.putExtra("ID", myNote.nodeID) //put id
         intent.putExtra("name", myNote.nodeName) //ut name
         intent.putExtra("des", myNote.nodeDesc) //put description
