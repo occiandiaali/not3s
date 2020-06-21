@@ -11,6 +11,7 @@ import android.view.MenuItem
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.SearchView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.row.view.*
@@ -118,18 +119,40 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+
         override fun getView(position: Int, convertView: View1?, parent: ViewGroup?): View1 {
             //inflate layout row.xml
             var myView = layoutInflater.inflate(R.layout.row, null)
             val myNote = listNotesAdapter[position]
             myView.titleTv.text = myNote.nodeName
             myView.descTv.text = myNote.nodeDesc
+
+           fun confirmDelete() {
+                val builder = AlertDialog.Builder(this@MainActivity)
+                builder.setTitle("Delete Note?")
+                builder.setMessage("Are you sure? This action cannot be reversed!")
+
+                // builder buttons
+                builder.setPositiveButton("Yes") { _, which ->
+                    var dbManager = DbManager(this.context!!)
+                    val selectionArgs = arrayOf(myNote.nodeID.toString())
+                    dbManager.delete("ID=?", selectionArgs)
+                    LoadQuery("%")
+                    Toast.makeText(this@MainActivity, "This Note is gone forever", Toast.LENGTH_SHORT).show()
+                } // positive button
+               builder.setNegativeButton("Cancel") { _, which ->
+                   Toast.makeText(this@MainActivity, "Note not deleted", Toast.LENGTH_SHORT).show()
+               }
+               builder.show()
+            } // confirm delete
+
             //delete button click
             myView.deleteBtn.setOnClickListener {
-                var dbManager = DbManager(this.context!!)
-                val selectionArgs = arrayOf(myNote.nodeID.toString())
-                dbManager.delete("ID=?", selectionArgs)
-                LoadQuery("%")
+                confirmDelete()
+//                var dbManager = DbManager(this.context!!)
+//                val selectionArgs = arrayOf(myNote.nodeID.toString())
+//                dbManager.delete("ID=?", selectionArgs)
+//                LoadQuery("%")
             }
 
             myView.setOnClickListener { GoToUpdateFun(myNote) }
