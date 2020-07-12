@@ -4,19 +4,21 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/not3s_logo_v1"
+        android:icon="@drawable/nota_logo"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/not3s_logo_v1"
+        android:roundIcon="@drawable/nota_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
             android:parentActivityName=".MainActivity"
-            android:name=".SettingsActivity"/>
+            android:name=".InfoActivity"/>
+        <activity
+            android:name=".SettingsActivity"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".AddNoteActivity"
             android:parentActivityName=".MainActivity" />
-        <activity
-            android:name=".MainActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

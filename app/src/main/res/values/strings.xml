@@ -1,9 +1,19 @@
 <resources>
     <string name="app_name">Nota</string>
     <string name="settings">Settings</string>
+    <string name="info">Info</string>
     <string name="search">Search</string>
     <string name="new_note">New</string>
     <string name="add_note_hint">Note title</string>
     <string name="note_hint">Note contents..</string>
     <string name="darkness">Mode (Dark/Light)</string>
+    <string name="about_app">
+        Nota is a simple notepad that helps you organise your thoughts.\n
+        No fancy features that you don\'t really need,
+        Just write down your ideas, itemize your projects (like a todo list),\n
+        Even let it help you with your shopping!
+        It\'s just a simple notebook.
+    </string>
+    <string name="built_by">built by</string>
+    <string name="no_note_hint">You have no Note</string>
 </resources>

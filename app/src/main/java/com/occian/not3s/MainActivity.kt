@@ -4,12 +4,15 @@ import android.app.SearchManager
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.SearchView
@@ -25,9 +28,26 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
         //Load from DB
         LoadQuery("%")
-    }
+        if (listNotes.isEmpty()) {
+            val inflater = layoutInflater
+            val container: ViewGroup? = findViewById(R.id.custom_toast_container)
+            val layout: ViewGroup = inflater.inflate(R.layout.custom_toast, container) as ViewGroup
+            val text: TextView = layout.findViewById(R.id.text)
+            text.text = "This place looks so empty!"
+            text.textSize = 27F
+            text.gravity = Gravity.CENTER
+            with (Toast(this@MainActivity)) {
+                setGravity(Gravity.CENTER_HORIZONTAL, 0, 0)
+                duration = Toast.LENGTH_LONG
+                view = layout
+                show()
+            }
+
+        } // graphic shows when no note has been created
+    } // on create
 
     override fun onResume() {
         super.onResume()
@@ -101,8 +121,13 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.action_settings -> {
                     val settingsIntent = Intent(this@MainActivity, SettingsActivity::class.java)
-                    settingsIntent.putExtra("settings", "settings")
+                    settingsIntent.putExtra("settings", "Settings")
                     startActivity(settingsIntent)
+                }
+                R.id.app_info -> {
+                    val infoIntent = Intent(this@MainActivity, InfoActivity::class.java)
+                    infoIntent.putExtra("info", "Info")
+                    startActivity(infoIntent)
                 }
             }
         }
@@ -179,13 +204,14 @@ class MainActivity : AppCompatActivity() {
                 //get description
                 val desc = myView.descTv.text.toString()
                 //concatenate
-                val s = title + "\n" + desc
+                // val s = title + "\n" + desc
                 //share intent
                 val shareIntent = Intent()
                 shareIntent.action = Intent.ACTION_SEND
                 shareIntent.type = "text/plain"
-                shareIntent.putExtra(Intent.EXTRA_TEXT, s)
-                startActivity(Intent.createChooser(shareIntent, s))
+                shareIntent.putExtra(Intent.EXTRA_SUBJECT, title)
+                shareIntent.putExtra(Intent.EXTRA_TEXT, desc)
+                startActivity(Intent.createChooser(shareIntent, "Send via"))
             }
 
             return myView

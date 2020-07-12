@@ -12,6 +12,12 @@ class SettingsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
 
+        val bundle:Bundle? = intent.extras
+        val actionBar = supportActionBar
+
+        val settingsLabel = bundle?.getString("settings")
+        actionBar?.title = settingsLabel
+
         darkSwitch.setOnClickListener {
             val isNightTheme = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
             when (isNightTheme) {
